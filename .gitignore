@@ -1,0 +1,52 @@
+.catkin_workspace
+build/
+devel/
+
+*.*.save
+
+# QtCreator files
+*.*.user
+*.*.autosave
+
+# KDevelop files
+*.kdev4
+
+# CLion
+*.idea
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+#temporary files
+*~
+
+# vi stuff
+.*.sw?
+
+# Python stuff
+*.pyc
+
+# Data files
+*.dat
+*.csv
+
+# Emacs temp files
+.#*
+
+# OSX Files
+.DS_Store
+
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
