@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  md49_messages
 )
 
 
@@ -48,11 +49,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-   FILES
-   md49_data.msg
-   md49_encoders.msg
-)
+#add_message_files(
+#   FILES
+#   md49_data.msg
+#   md49_encoders.msg
+#)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -175,7 +176,7 @@ include_directories(
 
 add_executable(md49_base_controller src/md49_base_controller/md49_base_controller_node.cpp include/md49_base_controller/md49_base_controller_class.h include/md49_serialport/serialport.h include/md49_serialport/serialport.cpp)
 target_link_libraries(md49_base_controller ${catkin_LIBRARIES})
-add_dependencies(md49_base_controller md49_base_controller_generate_messages_cpp)
+add_dependencies(md49_base_controller md49_messages_generate_messages_cpp)
 add_dependencies(md49_base_controller md49_base_controller_EXPORTED_TARGETS)
 
 
