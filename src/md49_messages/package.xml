@@ -3,17 +3,19 @@
   <name>md49_messages</name>
   <version>0.1.1</version>
   <description>The md49_messages package</description>
+  
+  <author email="scheik.todeswache@googlemail.com">Fabian Prinzing</author>
 
   <maintainer email="scheik.todeswache@googlemail.com">Fabian Prinzing</maintainer>
 
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-
   <build_depend>message_generation</build_depend>
-  <run_depend>message_runtime</run_depend>
-
   <build_depend>std_msgs</build_depend>
+  <run_depend>message_runtime</run_depend>
   <run_depend>std_msgs</run_depend>
 
+  <export>
+  </export>
 </package>
