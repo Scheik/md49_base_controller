@@ -1,23 +1,15 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(md49_base_controller)
+project(md49_serialport)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
   roscpp
-  rospy
-  std_msgs
-  message_generation
-  md49_messages
-  md49_serialport
 )
-
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-find_package(md49_serialport REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -50,11 +42,11 @@ find_package(md49_serialport REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-#add_message_files(
+# add_message_files(
 #   FILES
-#   md49_data.msg
-#   md49_encoders.msg
-#)
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -73,14 +65,8 @@ find_package(md49_serialport REQUIRED)
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs
-#   std_msgs
+#   std_msgs  # Or other packages containing msgs
 # )
-
-#generate_messages(
-#  DEPENDENCIES
-#  std_msgs
-#)
 
 ###################################
 ## catkin specific configuration ##
@@ -92,9 +78,9 @@ find_package(md49_serialport REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   INCLUDE_DIRS include
-#  LIBRARIES base_controller
-   CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs message_runtime 
+  INCLUDE_DIRS include
+  LIBRARIES serialport
+  CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
 )
 
@@ -105,31 +91,27 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(
-    include
-    ${catkin_INCLUDE_DIRS}
-)
+include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library
-# add_library(base_controller
-#   src/${PROJECT_NAME}/base_controller.cpp
+# add_library(serialport
+#   src/${PROJECT_NAME}/serialport.cpp
 # )
 
+add_library(md49_serialport src/md49_serialport.cpp)
+target_link_libraries(md49_serialport ${catkin_LIBRARIES})
+
 ## Declare a cpp executable
-# add_executable(base_controller_node src/base_controller_node.cpp)
-add_executable(md49_base_controller src/md49_base_controller/md49_base_controller_node.cpp include/md49_base_controller/md49_base_controller_class.h)
+# add_executable(serialport_node src/serialport_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(base_controller_node base_controller_generate_messages_cpp)
-add_dependencies(md49_base_controller md49_messages_generate_messages_cpp)
-add_dependencies(md49_base_controller md49_base_controller_EXPORTED_TARGETS)
+# add_dependencies(serialport_node serialport_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(base_controller_node
+# target_link_libraries(serialport_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(md49_base_controller ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -146,22 +128,18 @@ target_link_libraries(md49_base_controller ${catkin_LIBRARIES})
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS md49_base_controller
+install(TARGETS md49_serialport
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ## Mark cpp header files for installation
-install(DIRECTORY include/${PROJECT_NAME}/
-   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-   FILES_MATCHING PATTERN "*.h"
-   PATTERN ".svn" EXCLUDE
-)
-
-install(DIRECTORY config launch
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   FILES_MATCHING PATTERN "*.h"
+#   PATTERN ".svn" EXCLUDE
+# )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES
@@ -175,7 +153,7 @@ install(DIRECTORY config launch
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_base_controller.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_serialport.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
@@ -183,6 +161,11 @@ install(DIRECTORY config launch
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+#rosbuild_init()
 
+#set the default path for built executables to the "bin" directory
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+#set the default path for built libraries to the "lib" directory
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-
+#rosbuild_add_library(serialport src/serialport.cpp)
