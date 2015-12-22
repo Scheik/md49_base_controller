@@ -1,4 +1,4 @@
 ROS Package md49_serialport
 =============
 
-Contains roscpp library for serial communications with md49
+roscpp library for serial communications with md49 used by md49_base_controller
