@@ -2,8 +2,8 @@
 Changelog for package md49_messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.4 (2015-12-24)
+------------------
 * No changes, keep release on track with md49_base_controller
 * Contributors: Fabian Prinzing
 

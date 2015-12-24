@@ -2,8 +2,8 @@
 Changelog for package md49_serialport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.4 (2015-12-24)
+------------------
 * Update md49_serialport CMakeLists.txt: Marked header files for installation
 * Contributors: Fabian Prinzing
 
